@@ -1,40 +1,76 @@
 const time = document.getElementById("time");
 const today = document.getElementById("today");
 
-const hour = document.getElementById("hour");
-const minute = document.getElementById("minute");
-const second = document.getElementById("second");
+const hourHand = document.getElementById("hour");
+const minuteHand = document.getElementById("minute");
+const secondHand = document.getElementById("second");
 
-function updateClock() {
+const TIME_ZONE = "Asia/Tehran";
 
+function getTehranTime() {
     const now = new Date();
 
     const parts = new Intl.DateTimeFormat("en-US", {
-        timeZone: "Asia/Tehran",
+        timeZone: TIME_ZONE,
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
         hour12: false
     }).formatToParts(now);
 
-    const h = Number(parts.find(x => x.type === "hour").value);
-    const m = Number(parts.find(x => x.type === "minute").value);
-    const s = Number(parts.find(x => x.type === "second").value);
+    const values = {};
+
+    parts.forEach(part => {
+        if (part.type !== "literal") {
+            values[part.type] = part.value;
+        }
+    });
+
+    let hours = Number(values.hour);
+    const minutes = Number(values.minute);
+    const seconds = Number(values.second);
+
+    if (hours === 24) {
+        hours = 0;
+    }
+
+    return {
+        hours,
+        minutes,
+        seconds
+    };
+}
+
+function updateClock() {
+    const { hours, minutes, seconds } = getTehranTime();
 
     time.textContent =
-        String(h).padStart(2, "0") + ":" +
-        String(m).padStart(2, "0");
+        `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
-    today.textContent = "Today, +10hrs 30mins";
+    today.textContent = "Today, +3hrs 30mins";
 
-    const hourDeg = ((h % 12) * 30) + (m * 0.5);
-    const minuteDeg = (m * 6) + (s * 0.1);
-    const secondDeg = s * 6;
+    const hourDegrees =
+        ((hours % 12) * 30) +
+        (minutes * 0.5) +
+        (seconds / 120);
 
-    hour.style.transform = `rotate(${hourDeg}deg)`;
-    minute.style.transform = `rotate(${minuteDeg}deg)`;
-    second.style.transform = `rotate(${secondDeg}deg)`;
+    const minuteDegrees =
+        (minutes * 6) +
+        (seconds * 0.1);
+
+    const secondDegrees =
+        seconds * 6;
+
+    hourHand.style.transform =
+        `rotate(${hourDegrees}deg)`;
+
+    minuteHand.style.transform =
+        `rotate(${minuteDegrees}deg)`;
+
+    secondHand.style.transform =
+        `rotate(${secondDegrees}deg)`;
 }
 
 updateClock();
+
 setInterval(updateClock, 1000);
