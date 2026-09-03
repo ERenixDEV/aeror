@@ -1,171 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-html,
 body {
-    width: 100%;
-    min-height: 100%;
-}
+    margin: 0;
+    background: #1e1e1e;
+    color: white;
+    font-family: Arial, sans-serif;
 
-body {
-    background: #000;
-    color: #fff;
-    font-family: "JetBrains Mono", monospace;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
-/* subtle scanlines */
+.clock-box {
+    width: 360px;
+    height: 105px;
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
+    background: #1e1e1e;
 
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(255, 255, 255, 0.018) 4px
-    );
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 18px;
 }
 
-/* ambient glow */
-
-body::after {
-    content: "";
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.025);
-
-    filter: blur(100px);
-    pointer-events: none;
+.digital {
+    display: flex;
+    flex-direction: column;
 }
 
-.clock-wrapper {
-    width: 100%;
-    padding: 25px;
+#time {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
 }
 
-.clock-card {
-    width: min(850px, 100%);
-    margin: auto;
+.location {
+    font-size: 13px;
+    color: #d0d0d0;
+    margin-top: 4px;
+}
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: #030303;
+.today {
+    font-size: 12px;
+    color: #bdbdbd;
+    margin-top: 4px;
+}
 
-    padding: 32px 40px;
-
+.analog {
     position: relative;
 
-    box-shadow:
-        0 0 40px rgba(255, 255, 255, 0.025),
-        inset 0 0 40px rgba(255, 255, 255, 0.015);
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
 }
 
-.top-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.numbers span {
+    position: absolute;
 
-    color: #777;
     font-size: 11px;
-    letter-spacing: 3px;
+    font-weight: 600;
 
-    margin-bottom: 35px;
+    transform: translate(-50%, -50%);
 }
 
-.clock {
-    text-align: center;
+.n12 { left: 50%; top: 7%; }
+.n1  { left: 68%; top: 13%; }
+.n2  { left: 82%; top: 30%; }
+.n3  { left: 91%; top: 50%; }
+.n4  { left: 82%; top: 70%; }
+.n5  { left: 68%; top: 87%; }
+.n6  { left: 50%; top: 94%; }
+.n7  { left: 32%; top: 87%; }
+.n8  { left: 18%; top: 70%; }
+.n9  { left: 9%; top: 50%; }
+.n10 { left: 18%; top: 30%; }
+.n11 { left: 32%; top: 13%; }
 
-    font-size: clamp(48px, 10vw, 105px);
-    font-weight: 700;
+.hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
 
-    letter-spacing: 8px;
-    line-height: 1;
+    transform-origin: bottom center;
 
-    color: #fff;
-
-    text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.35),
-        0 0 30px rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
 }
 
-.date {
-    text-align: center;
-
-    margin-top: 28px;
-
-    color: #aaa;
-    font-size: clamp(10px, 2vw, 14px);
-
-    letter-spacing: 4px;
+.hour {
+    width: 3px;
+    height: 25px;
+    background: white;
 }
 
-.status {
-    margin-top: 35px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-
-    color: #555;
-
-    font-size: 9px;
-    letter-spacing: 3px;
+.minute {
+    width: 2px;
+    height: 34px;
+    background: white;
 }
 
-.dot {
-    width: 5px;
-    height: 5px;
+.second {
+    width: 1px;
+    height: 37px;
+    background: #4da3ff;
+}
 
-    background: #fff;
+.center {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    background: #4da3ff;
+
     border-radius: 50%;
 
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    left: 50%;
+    top: 50%;
 
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.3;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .clock-card {
-        padding: 25px 18px;
-    }
-
-    .top-line {
-        letter-spacing: 2px;
-    }
-
-    .clock {
-        letter-spacing: 3px;
-    }
-
-    .date {
-        letter-spacing: 2px;
-    }
+    transform: translate(-50%, -50%);
 }
