@@ -1,40 +1,40 @@
-const clock = document.getElementById("clock");
-const date = document.getElementById("date");
+const time = document.getElementById("time");
+const today = document.getElementById("today");
+
+const hour = document.getElementById("hour");
+const minute = document.getElementById("minute");
+const second = document.getElementById("second");
 
 function updateClock() {
 
     const now = new Date();
 
-    const formatter = new Intl.DateTimeFormat("en-US", {
+    const parts = new Intl.DateTimeFormat("en-US", {
         timeZone: "Asia/Tehran",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
         hour12: false
-    });
+    }).formatToParts(now);
 
-    const dateFormatter = new Intl.DateTimeFormat("en-US", {
-        timeZone: "Asia/Tehran",
-        weekday: "long",
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
-    });
+    const h = Number(parts.find(x => x.type === "hour").value);
+    const m = Number(parts.find(x => x.type === "minute").value);
+    const s = Number(parts.find(x => x.type === "second").value);
 
-    let time = formatter.format(now);
+    time.textContent =
+        String(h).padStart(2, "0") + ":" +
+        String(m).padStart(2, "0");
 
-    time = time.replace(/\s/g, "");
+    today.textContent = "Today, +10hrs 30mins";
 
-    clock.textContent = time;
+    const hourDeg = ((h % 12) * 30) + (m * 0.5);
+    const minuteDeg = (m * 6) + (s * 0.1);
+    const secondDeg = s * 6;
 
-    const formattedDate = dateFormatter
-        .format(now)
-        .toUpperCase()
-        .replace(",", " •");
-
-    date.textContent = formattedDate;
+    hour.style.transform = `rotate(${hourDeg}deg)`;
+    minute.style.transform = `rotate(${minuteDeg}deg)`;
+    second.style.transform = `rotate(${secondDeg}deg)`;
 }
 
 updateClock();
-
 setInterval(updateClock, 1000);
