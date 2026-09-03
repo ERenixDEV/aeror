@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: "JetBrains Mono", monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* subtle scanlines */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(255, 255, 255, 0.018) 4px
+    );
+}
+
+/* ambient glow */
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.clock-wrapper {
+    width: 100%;
+    padding: 25px;
+}
+
+.clock-card {
+    width: min(850px, 100%);
+    margin: auto;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #030303;
+
+    padding: 32px 40px;
+
+    position: relative;
+
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.025),
+        inset 0 0 40px rgba(255, 255, 255, 0.015);
+}
+
+.top-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 3px;
+
+    margin-bottom: 35px;
+}
+
+.clock {
+    text-align: center;
+
+    font-size: clamp(48px, 10vw, 105px);
+    font-weight: 700;
+
+    letter-spacing: 8px;
+    line-height: 1;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.35),
+        0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+.date {
+    text-align: center;
+
+    margin-top: 28px;
+
+    color: #aaa;
+    font-size: clamp(10px, 2vw, 14px);
+
+    letter-spacing: 4px;
+}
+
+.status {
+    margin-top: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+
+    color: #555;
+
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+
+    background: #fff;
+    border-radius: 50%;
+
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .clock-card {
+        padding: 25px 18px;
+    }
+
+    .top-line {
+        letter-spacing: 2px;
+    }
+
+    .clock {
+        letter-spacing: 3px;
+    }
+
+    .date {
+        letter-spacing: 2px;
+    }
+}
