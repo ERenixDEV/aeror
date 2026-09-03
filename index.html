@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AEROR • Tehran Time</title>
-
+    <title>Tehran Time</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="clock-wrapper">
+<div class="clock-box">
 
-        <div class="clock-card">
+    <div class="digital">
+        <div id="time">00:00</div>
+        <div class="location">Tehran, Iran</div>
+        <div class="today" id="today">Today</div>
+    </div>
 
-            <div class="top-line">
-                <span>AEROR</span>
-                <span>TEHRAN / IR</span>
-            </div>
-
-            <div class="clock" id="clock">
-                00:00:00
-            </div>
-
-            <div class="date" id="date">
-                THURSDAY • 03 SEPTEMBER 2026
-            </div>
-
-            <div class="status">
-                <span class="dot"></span>
-                IRAN STANDARD TIME
-            </div>
-
+    <div class="analog">
+        <div class="numbers">
+            <span class="n12">12</span>
+            <span class="n1">1</span>
+            <span class="n2">2</span>
+            <span class="n3">3</span>
+            <span class="n4">4</span>
+            <span class="n5">5</span>
+            <span class="n6">6</span>
+            <span class="n7">7</span>
+            <span class="n8">8</span>
+            <span class="n9">9</span>
+            <span class="n10">10</span>
+            <span class="n11">11</span>
         </div>
 
-    </main>
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+        <div class="center"></div>
+    </div>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
