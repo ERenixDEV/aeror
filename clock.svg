@@ -10,12 +10,12 @@
   <text x="30" y="84"
         fill="#d0d0d0"
         font-family="Arial, Helvetica, sans-serif"
-        font-size="14">a zenox :</text>
+        font-size="14">我的作息时间很不规律:</text>
 
   <text x="30" y="106"
         fill="#aaaaaa"
         font-family="Arial, Helvetica, sans-serif"
-        font-size="12">hummmm!</text>
+        font-size="12">zenox core</text>
 
   <g transform="translate(335 75)"
      font-family="Arial, Helvetica, sans-serif"
